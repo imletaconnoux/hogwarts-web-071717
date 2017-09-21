@@ -12,36 +12,54 @@ class HogsContainer extends React.Component{
     }
   }
 
-  handleSubmit = (event) => {
+  handleFilter = (event) => {
     event.preventDefault()
+
+    // console.log(event.target)
+    if (this.state.hogs.length === 13 ){
+
+      const greased = this.state.hogs.filter((hog) => { return hog.greased === true})
+      this.setState ({hogs: greased}, console.log(this.state.hogs))
+      console.log(greased)
+      //console.log(this.state.hogs)
+    } else {
+      this.setState ({
+        hogs: [...this.props.hogsData]
+      })
+    }
   }
 
-  // showDetails = (hog) => {
-  //   hog.isShowing = true
-  //   this.setState = ({
-  //     hogs: [...{hog}]
-  //   })
-    // const hogName = this.state.hogs.find((hog) => hog.name === hogToFind.name )
-    // this.setState({
-    //   isShowing: true
-    // }, console.log(this.state))
+  handleSort = (e) => {
+    let newHogs = this.state.hogs.sort((prev, next) => {
+      if (prev[e.target.value] < next[e.target.value]) return -1
+      if (prev[e.target.value] > next[e.target.value]) return 1
+      return 0
+    })
+
+   this.setState({
+      filteredhogs: newHogs
+    })
+  }
+
+
+
 
 
   render() {
     return (
       <div className= "ui container">
 
-        <form onSubmit={this.handleSubmit}>
+
           <label>Greased?</label>
-          <input type="checkbox" id="greased" onChange={this.handleChange}/>
+          <input type="checkbox" id="greased" onChange={this.handleFilter}/>
           <label>Sort By:</label>
-          <select onChange={this.handleSelect}>
+          <select onChange={this.handleSort}>
             <option></option>
             <option value="name">Name</option>
             <option value="weight">Weight</option>
           </select>
-          <input type="submit" value="Filter hogs"/>
-          </form>
+
+
         <HogsIndex allHogs={this.state.hogs} showMeMore={this.showDetails} />
       </div>
     )
