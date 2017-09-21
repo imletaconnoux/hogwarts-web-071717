@@ -3,8 +3,6 @@ import React from 'react';
 import HogsIndex from './HogsIndex';
 import HogTile from './HogTile';
 
-
-
 class HogsContainer extends React.Component{
 
   constructor(props){
@@ -18,19 +16,16 @@ class HogsContainer extends React.Component{
     event.preventDefault()
   }
 
-
-  showDetails = (hog) => {
-    console.log(hog)
-    hog.isShowing = true
-    this.setState = ({
-      hogs: [...{hog}]
-    })
-    console.log(this.state)
+  // showDetails = (hog) => {
+  //   hog.isShowing = true
+  //   this.setState = ({
+  //     hogs: [...{hog}]
+  //   })
     // const hogName = this.state.hogs.find((hog) => hog.name === hogToFind.name )
     // this.setState({
     //   isShowing: true
     // }, console.log(this.state))
-  }
+
 
   render() {
     return (

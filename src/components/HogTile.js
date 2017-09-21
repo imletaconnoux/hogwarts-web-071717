@@ -1,30 +1,35 @@
 import React from 'react';
 
-const HogTile = (props) => {
+class HogTile extends React.Component{
 
-  const clickHandler = () => {
-    // console.log(event)
-    return props.showMeMore(props.hog)
+  constructor(props){
+    super(props);
+    this.state = {
+      isDetailShowing: false
+    }
   }
 
-  return(
-    <div className="pigTile">
-      <h3 className= "content" onClick={clickHandler}> Name: {props.hog.name}</h3>
-      <div>
-        {clickHandler}
+  togglePig = () => {
+    this.setState ({
+      isDetailShowing: !this.state.isDetailShowing
+    })
+  }
+
+render() {
+  return (
+    <div className="pigTile" onClick={this.togglePig}>
+      <h3 className= "content"> Name: {this.props.hog.name}</h3>
+      <div className="extra content">
+        { this.state.isDetailShowing ?
+          <div><p>Specialty: {this.props.hog.specialty}</p>
+          <p>Highest Honor: {this.props.hog['highest medal achieved']}</p>
+          <p>Weight: {this.props.hog.weight}</p>
+          </div> : null }
       </div>
     </div>
-
-  )
+    )
+  }
 }
 
 
 export default HogTile;
-// 
-// return(
-//   <div>
-//     <h3 className= "content">Weight: {hog.weight}</h3>
-//     <h3 className= "content">Specialty: {hog.specialty}</h3>
-//     <h3 className= "content">Greased: {hog.greased}</h3>
-//   </div>
-// )
