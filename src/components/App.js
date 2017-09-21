@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Hogs } from '../porkers_data.js'
+import Hogs from '../porkers_data.js'
 import '../App.css';
 import Nav from './Nav';
 import HogsContainer from './HogsContainer';
@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div className="App">
           < Nav />
-          < HogsContainer />
+          < HogsContainer hogsData={Hogs}/>
 
       </div>
     )

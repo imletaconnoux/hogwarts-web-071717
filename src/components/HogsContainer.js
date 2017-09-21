@@ -1,26 +1,53 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Hogs } from '../porkers_data.js'
+
 import HogsIndex from './HogsIndex';
 import HogTile from './HogTile';
 
 
+
 class HogsContainer extends React.Component{
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      hogs: []
+      hogs: [...this.props.hogsData]
     }
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+  }
 
+
+  showDetails = (hog) => {
+    console.log(hog)
+    hog.isShowing = true
+    this.setState = ({
+      hogs: [...{hog}]
+    })
+    console.log(this.state)
+    // const hogName = this.state.hogs.find((hog) => hog.name === hogToFind.name )
+    // this.setState({
+    //   isShowing: true
+    // }, console.log(this.state))
+  }
 
   render() {
     return (
-      <div>
-        <p>Hi</p>
-        <HogsIndex />
+      <div className= "ui container">
+
+        <form onSubmit={this.handleSubmit}>
+          <label>Greased?</label>
+          <input type="checkbox" id="greased" onChange={this.handleChange}/>
+          <label>Sort By:</label>
+          <select onChange={this.handleSelect}>
+            <option></option>
+            <option value="name">Name</option>
+            <option value="weight">Weight</option>
+          </select>
+          <input type="submit" value="Filter hogs"/>
+          </form>
+        <HogsIndex allHogs={this.state.hogs} showMeMore={this.showDetails} />
       </div>
     )
   }
